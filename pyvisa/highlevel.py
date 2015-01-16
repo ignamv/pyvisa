@@ -1583,7 +1583,9 @@ class ResourceManager(object):
         :rtype: :class:`pyvisa.highlevel.ResourceInfo`
         """
         ret, err = self.visalib.parse_resource_extended(self.session, resource_name)
-        if err == constants.StatusCode.success:
+        if err == constants.StatusCode.success or \
+                err == constants.StatusCode.\
+                warning_ext_function_not_implemented:
             return ret
         raise ValueError('Could not parse resource: %s' % resource_name)
 
